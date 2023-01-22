@@ -27,7 +27,7 @@
     <ClCompile Include="projectileObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="targetPoint.cpp">
+    <ClCompile Include="targetCoin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="textObject.cpp">
@@ -50,7 +50,7 @@
     <ClInclude Include="projectileObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetPoint.h">
+    <ClInclude Include="targetCoin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="textObject.h">

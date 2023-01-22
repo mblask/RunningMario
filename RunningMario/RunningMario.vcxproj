@@ -139,7 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="marioObject.cpp" />
     <ClCompile Include="projectileObject.cpp" />
-    <ClCompile Include="targetPoint.cpp" />
+    <ClCompile Include="targetCoin.cpp" />
     <ClCompile Include="textObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +148,7 @@
     <ClInclude Include="helperFunctions.h" />
     <ClInclude Include="marioObject.h" />
     <ClInclude Include="projectileObject.h" />
-    <ClInclude Include="targetPoint.h" />
+    <ClInclude Include="targetCoin.h" />
     <ClInclude Include="textObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

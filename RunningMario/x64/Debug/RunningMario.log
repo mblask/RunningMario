@@ -1,5 +1,7 @@
 ﻿  game.cpp
-D:\C++\RunningMario\RunningMario\game.cpp(9,56): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
-D:\C++\RunningMario\RunningMario\game.cpp(9,48): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
-D:\C++\RunningMario\RunningMario\game.cpp(9,40): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+  gameManager.cpp
+  main.cpp
+  marioObject.cpp
+  projectileObject.cpp
+  Generating Code...
   RunningMario.vcxproj -> D:\C++\RunningMario\x64\Debug\RunningMario.exe
