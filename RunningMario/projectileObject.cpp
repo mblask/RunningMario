@@ -1,9 +1,9 @@
 #include "projectileObject.h"
 
 void ProjectileObject::Setup() {
-	_objectTexture.loadFromFile("..\\media\\projectiles_0.png");
-
+	_objectTexture.loadFromFile("D:\\C++\\Materials\\projectiles_0.png");
 	_objectSprite.setTexture(_objectTexture);
+
 	_spriteSheetOrigin = { 0, 0 };
 	_spriteDimensions = { 80, 80 };
 	_spriteAnchor = { 0.5f, 0.5f };

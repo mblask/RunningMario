@@ -15,24 +15,40 @@ void runGame() {
 	marioObject->GrabTargetPoint(&targetPoint);
 	
 	const int numberOfProjectiles = 10;
+
 	ProjectileObject projectiles[numberOfProjectiles];
 	for (int i = 0; i < numberOfProjectiles; i++)
 	{
 		projectiles[i].SetWindow(&window);
 		projectiles[i].Setup();
-
+	
 		if (i < 2)
 			projectiles[i].ActivateProjectile(true);
-
-		//gameManager->AddProjectile(&projectiles[i]);
 	}
 
 	sf::Color backgroundColor = sf::Color((sf::Uint8)150.0f, (sf::Uint8)100.0f, (sf::Uint8)50.0f);
 	sf::Vector3f colorChangeSigns = { 1.0f, 1.0f, 1.0f };
 
-	TextObject scoreText1(&window, "Score: 0");
-	scoreText1.SetPosition({ 0.85f, 0.05f });
+	TextObject timeText(&window, "Time: 0s");
+	timeText.SetPosition({ 0.5f, 0.05f });
 
+	TextObject scoreText(&window, "Score: 0");
+	scoreText.SetPosition({ 0.85f, 0.05f });
+
+	TextObject exitText(&window, "To exit,\nhit 'Esc'!");
+	exitText.SetPosition({ 0.92f, 0.92f });
+	exitText.SetCharacterSize(14);
+
+	TextObject highscoresTextTitle(&window, "Highscores:");
+	highscoresTextTitle.SetPosition({ 0.94f, 0.3f });
+	highscoresTextTitle.SetCharacterSize(16);
+	TextObject highscoresText(&window, "");
+	highscoresText.SetPosition({ 0.95f, 0.33f });
+	highscoresText.SetCharacterSize(14);
+
+	gameManager->SetHighscoresTextObject(&highscoresText);
+
+	bool testBool = false;
 	while (window.isOpen()) {
 
 		window.clear(backgroundColor);
@@ -60,7 +76,8 @@ void runGame() {
 			projectiles[i].Update();
 
 		//TEXT UPDATES
-		scoreText1.SetText("Score: " + std::to_string(gameManager->GetScore()));
+		timeText.SetText("Time: " + std::to_string((int)(gameManager->GetPassedTime())) + "s");
+		scoreText.SetText("Score: " + std::to_string(gameManager->GetScore()));
 
 		//OBJECT DRAWING
 		window.draw(targetPoint.GetSprite());
@@ -69,9 +86,29 @@ void runGame() {
 			window.draw(projectiles[i].GetSprite());
 
 		//TEXT DRAWING
-		window.draw(scoreText1.GetText());
+		window.draw(timeText.GetText());
+		window.draw(scoreText.GetText());
+		window.draw(exitText.GetText());
+		window.draw(highscoresTextTitle.GetText());
+		window.draw(highscoresText.GetText());
 
 		window.display();
+	}
+}
+
+void activateProjectiles(ProjectileObject projectiles[], int totalNumberOfProjectiles) {
+	int numberOfProjectilesToActivate = 2;
+	int count = 0;
+	for (int i = 0; i < totalNumberOfProjectiles; i++)
+	{
+		if (projectiles[i].IsActive())
+			continue;
+
+		count++;
+		if (count > numberOfProjectilesToActivate)
+			break;
+
+		projectiles[i].ActivateProjectile(true);
 	}
 }
 

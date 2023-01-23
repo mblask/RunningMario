@@ -11,3 +11,4 @@
 
 void runGame();
 sf::Color colorFlow(const sf::Color color, sf::Vector3f& colorChangeSigns);
+void activateProjectiles(ProjectileObject projectiles[], int totalNumberOfProjectiles);

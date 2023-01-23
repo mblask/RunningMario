@@ -17,7 +17,6 @@ GameManager::GameManager() {
 	_score = 0;
 	_numberOfHighscores = 10;
 	_highscoresTextObject = NULL;
-	//_projectileObjects.reserve(10);
 
 	std::cout << "GameManager initialized!" << std::endl;
 }
@@ -50,24 +49,6 @@ void GameManager::ResetTimePassed() {
 
 void GameManager::UpdateScore(int increment) {
 	_score += increment;
-
-	/*
-	if (_score % 2 == 0)
-	{
-		int projectsToRelease = 2;
-		for (int i = 0; i < std::size(_projectileObjects); i++)
-		{
-			if (_projectileObjects[i]->IsActive())
-				continue;
-
-			_projectileObjects[i]->ActivateProjectile(true);
-			projectsToRelease--;
-
-			if (projectsToRelease <= 0)
-				break;
-		}
-	}
-	*/
 }
 
 int GameManager::GetScore() {
@@ -112,7 +93,3 @@ void GameManager::ShowHighscores() {
 
 	_highscoresTextObject->SetText(newTextString);
 }
-
-//void GameManager::AddProjectile(ProjectileObject* projectile) {
-//	_projectileObjects.push_back(projectile);
-//}
