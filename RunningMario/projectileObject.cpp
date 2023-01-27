@@ -22,8 +22,9 @@ void ProjectileObject::Setup() {
 	_objectSprite.setPosition(GetRandomBoundaryPosition((sf::Vector2i)_window->getSize(), {-1.0f * _spriteDimensions.x, -1.0f * _spriteDimensions.y}));
 
 	_isActive = false;
+	_initialPosition = _objectSprite.getPosition();
 
-	_projectileSpeed = 200.0f;
+	_baseSpeed = 200.0f;
 	_projectileDirection = GetRandomDirection();
 
 	_gameManager = GameManager::GetInstance();
@@ -50,6 +51,10 @@ void ProjectileObject::SetPosition(sf::Vector2f position) {
 	_objectSprite.setPosition(position);
 }
 
+void ProjectileObject::ResetPosition() {
+	_objectSprite.setPosition(_initialPosition);
+}
+
 sf::Sprite ProjectileObject::GetSprite() {
 	return _objectSprite;
 }
@@ -62,6 +67,14 @@ bool ProjectileObject::IsActive() {
 	return _isActive;
 }
 
+void ProjectileObject::IncreaseSpeedByPercentage(float percentage) {
+	_speedBonus *= (1.0f + percentage / 100.0f);
+}
+
+void ProjectileObject::ResetSpeed() {
+	_speedBonus = 1.0f;
+}
+
 void ProjectileObject::move() {
 	if (_projectileDirection == sf::Vector2f(0, 0))
 	{
@@ -69,13 +82,14 @@ void ProjectileObject::move() {
 		_projectileDirection = normalizeVector2(direction);
 	}
 
-	if (_projectileSpeed == 0) {
+	if (_baseSpeed == 0) {
 		std::cout << "No projectile speed set!" << std::endl;
 		return;
 	}
 
+	float speed = _baseSpeed * _speedBonus;
 	sf::Vector2f objectPosition = _objectSprite.getPosition();
-	objectPosition += _projectileSpeed * _projectileDirection * _gameManager->GetTimeDelta();
+	objectPosition += speed * _projectileDirection * _gameManager->GetTimeDelta();
 
 	if (objectPosition.x < -(float)_window->getSize().x * 0.1f || objectPosition.y < -(float)_window->getSize().y * 0.1f ||
 		objectPosition.x > +(float)_window->getSize().x * 1.1f || objectPosition.y > +(float)_window->getSize().y * 1.1f) {

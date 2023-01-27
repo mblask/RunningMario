@@ -22,9 +22,10 @@ void runGame() {
 		projectiles[i].SetWindow(&window);
 		projectiles[i].Setup();
 	
-		if (i < 2)
+		if (i < 1)
 			projectiles[i].ActivateProjectile(true);
 	}
+	gameManager->SetProjectiles(projectiles, numberOfProjectiles);
 
 	sf::Color backgroundColor = sf::Color((sf::Uint8)150.0f, (sf::Uint8)100.0f, (sf::Uint8)50.0f);
 	sf::Vector3f colorChangeSigns = { 1.0f, 1.0f, 1.0f };

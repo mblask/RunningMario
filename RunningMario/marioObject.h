@@ -9,6 +9,9 @@
 #include "gameManager.h"
 #include "targetCoin.h"
 
+class GameManager;
+class TargetCoin;
+
 class MarioObject
 {
 private:

@@ -6,6 +6,10 @@
 #include <SFML/Graphics.hpp>
 
 #include "textObject.h"
+#include "projectileObject.h"
+
+class TextObject;
+class ProjectileObject;
 
 class GameManager
 {
@@ -42,4 +46,12 @@ public:
 	void AddHighscore();
 	void SetHighscoresTextObject(TextObject* textObject);
 	void ShowHighscores();
+
+private:
+	std::vector<ProjectileObject*> _projectiles;
+	void activateProjectiles(int numberToActivate = 1);
+
+public:
+	void SetProjectiles(ProjectileObject projectiles[], int numberOfProjectiles);
+	void ResetProjectiles();
 };

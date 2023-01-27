@@ -8,23 +8,24 @@
 #include "gameManager.h"
 #include "marioObject.h"
 
+class GameManager;
+class MarioObject;
+
 class ProjectileObject {
 public:
     void Setup();
-
     void Update();
 
     void SetCurrentSprite(sf::Vector2i currentSpritePosition);
-
     void SetWindow(sf::RenderWindow* window);
-
     void SetPosition(sf::Vector2f position);
-
     sf::Sprite GetSprite();
 
     void ActivateProjectile(bool value);
-
     bool IsActive();
+    void ResetPosition();
+    void IncreaseSpeedByPercentage(float percentage);
+    void ResetSpeed();
 
 private:
     sf::Texture _objectTexture;
@@ -43,13 +44,13 @@ private:
     bool _isActive;
 
     sf::Vector2f _initialPosition;
-    float _projectileSpeed = 0.0f;
+    float _baseSpeed = 0.0f;
+    float _speedBonus = 1.0f;
     sf::Vector2f _projectileDirection;
 
-    MarioObject* _marioObject = NULL;
     GameManager* _gameManager = NULL;
+    MarioObject* _marioObject = NULL;
 
     void move();
-
     void checkMario();
 };

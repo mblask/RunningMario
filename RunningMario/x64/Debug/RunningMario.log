@@ -1,2 +1,7 @@
 ﻿  game.cpp
+  gameManager.cpp
+  main.cpp
+  marioObject.cpp
+  projectileObject.cpp
+  Generating Code...
   RunningMario.vcxproj -> D:\C++\RunningMario\x64\Debug\RunningMario.exe
