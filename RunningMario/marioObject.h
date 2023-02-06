@@ -38,11 +38,15 @@ private:
 public:
     sf::Sprite GetSprite();
 
+
 private:
     sf::RenderWindow* _window;
 
 public:
     void SetWindow(sf::RenderWindow* window);
+
+private:
+    GameManager* _gameManager = NULL;
 
 
 private:
@@ -55,6 +59,7 @@ public:
 
 private:
     sf::Vector2f _directionVector;
+    bool _isMoving;
     float _movementSpeed;
     float _speedMultiplier;
     bool _objectIsRotating;
@@ -63,20 +68,14 @@ private:
     float _objectTotalRotation;
 
     void playerInput();
-
     void animator();
-
     void animateRunning();
-
     void animateRotation();
-
     void move(sf::Vector2f direction);
-
     bool positionValid(sf::Vector2f position, sf::Vector2f margins = sf::Vector2f(0.0f, 0.0f));
-
     void updateSpriteRenderer();
-
     void rotateObjectNTimes(int times);
+    void draw();
 
 public:
     void ResetPosition();

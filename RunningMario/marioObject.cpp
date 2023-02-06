@@ -31,14 +31,16 @@ MarioObject::MarioObject() {
 	_spriteDimensions = { 22, 28 };
 	_spriteAnchor = { 0.5f, 0.5f };
 
-	_previousObjectSprite = { 0, 0 };
-	_currentObjectSprite = { 0, 0 };
+	_previousObjectSprite = { 5, 0 };
+	_currentObjectSprite = { 5, 0 };
 
 	_objectSprite.setOrigin(_spriteDimensions.x * _spriteAnchor.x, _spriteDimensions.y * _spriteAnchor.y);
 	_objectSprite.setPosition(100, 100);
 	_objectSprite.setScale(2, 2);
 
 	updateSpriteRenderer();
+
+	_gameManager = GameManager::GetInstance();
 
 	std::cout << "MarioObject initialized!" << std::endl;
 }
@@ -50,6 +52,7 @@ void MarioObject::Update() {
 	animator();
 	updateSpriteRenderer();
 	checkTargetPoint();
+	draw();
 }
 
 sf::Sprite MarioObject::GetSprite() {
@@ -108,6 +111,7 @@ void MarioObject::playerInput() {
 		_directionVector -= { -1.0f, 0.0f };
 
 	_directionVector = normalizeVector2(_directionVector);
+	_isMoving = getVector2Length(_directionVector) != 0.0f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 		_speedMultiplier = 1.4f;
@@ -115,23 +119,50 @@ void MarioObject::playerInput() {
 		_speedMultiplier = 1.0f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-		if (_objectIsRotating)
-			return;
-
-		_objectIsRotating = true;
+		if (!_objectIsRotating) {
+			_previousObjectSprite = _currentObjectSprite;
+			_rotationSign = _directionVector.x;
+			_objectIsRotating = true;
+		}
 	}
 }
 
 void MarioObject::animator() {
-
+	animateRunning();
+	animateRotation();
 }
 
 void MarioObject::animateRunning() {
 
+	if (!_isMoving)
+		return;
+
+	if (_directionVector == sf::Vector2f(+1.0f, 0.0f)) {
+		_currentObjectSprite = { 8, 0 };
+		return;
+	}
+
+	if (_directionVector == sf::Vector2f(-1.0f, 0.0f)) {
+		_currentObjectSprite = { 1, 0 };
+		return;
+	}
+
+	if (_directionVector == sf::Vector2f(0.0f, +1.0f)) {
+		_currentObjectSprite = { 6, 0 };
+		return;
+	}
+
+	if (_directionVector == sf::Vector2f(0.0f, -1.0f)) {
+		_currentObjectSprite = { 2, 0 };
+		return;
+	}
 }
 
 void MarioObject::animateRotation() {
+	if (!_objectIsRotating)
+		return;
 
+	_currentObjectSprite = { 1, 1 };
 }
 
 void MarioObject::move(sf::Vector2f direction) {
@@ -186,9 +217,13 @@ void MarioObject::rotateObjectNTimes(int times) {
 	if (_objectTotalRotation < fullRotation)
 		_objectSprite.setRotation(rotationAngle);
 	else {
+		_currentObjectSprite = _previousObjectSprite;
 		_objectSprite.setRotation(0.0f);
 		_objectTotalRotation = 0.0f;
 		_objectIsRotating = false;
-		_currentObjectSprite = _previousObjectSprite;
 	}
+}
+
+void MarioObject::draw() {
+	_window->draw(_objectSprite);
 }

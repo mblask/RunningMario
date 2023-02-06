@@ -19,7 +19,7 @@ void ProjectileObject::Setup() {
 		_spriteDimensions.y
 		});
 
-	_objectSprite.setPosition(GetRandomBoundaryPosition((sf::Vector2i)_window->getSize(), {-1.0f * _spriteDimensions.x, -1.0f * _spriteDimensions.y}));
+	ResetPosition();
 
 	_isActive = false;
 	_initialPosition = _objectSprite.getPosition();
@@ -37,6 +37,7 @@ void ProjectileObject::Update() {
 
 	move();
 	checkMario();
+	draw();
 }
 
 void ProjectileObject::SetCurrentSprite(sf::Vector2i currentSprite) {
@@ -52,7 +53,7 @@ void ProjectileObject::SetPosition(sf::Vector2f position) {
 }
 
 void ProjectileObject::ResetPosition() {
-	_objectSprite.setPosition(_initialPosition);
+	_objectSprite.setPosition(GetRandomBoundaryPosition((sf::Vector2i)_window->getSize(), { -1.0f * _spriteDimensions.x, -1.0f * _spriteDimensions.y }));
 }
 
 sf::Sprite ProjectileObject::GetSprite() {
@@ -115,7 +116,11 @@ void ProjectileObject::checkMario() {
 	_gameManager->ResetTimePassed();
 	_marioObject->ResetPosition();
 
-	SetPosition(GetRandomBoundaryPosition((sf::Vector2i)_window->getSize(), {0.0f, 0.0f}));
+	ResetPosition();
 	sf::Vector2f direction = _marioObject->GetSprite().getPosition() - _objectSprite.getPosition();
 	_projectileDirection = normalizeVector2(direction);
+}
+
+void ProjectileObject::draw() {
+	_window->draw(_objectSprite);
 }

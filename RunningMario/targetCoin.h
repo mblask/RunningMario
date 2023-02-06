@@ -14,6 +14,7 @@ public:
     void SetRandomPosition();
 
     sf::Sprite GetSprite();
+    void Draw();
 
 private:
     sf::Texture _targetCoinTexture;

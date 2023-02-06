@@ -68,30 +68,25 @@ void runGame() {
 
 		window.setActive();
 
-		//OBJECT UPDATES
+		//OBJECT UPDATES AND DRAWS
 		backgroundColor = colorFlow(backgroundColor, colorChangeSigns);
 		
 		gameManager->Update();
 		marioObject->Update();
 		for (int i = 0; i < numberOfProjectiles; i++)
 			projectiles[i].Update();
+		
+		targetPoint.Draw();
 
-		//TEXT UPDATES
+		//TEXT UPDATES AND DRAWS
 		timeText.SetText("Time: " + std::to_string((int)(gameManager->GetPassedTime())) + "s");
 		scoreText.SetText("Score: " + std::to_string(gameManager->GetScore()));
 
-		//OBJECT DRAWING
-		window.draw(targetPoint.GetSprite());
-		window.draw(marioObject->GetSprite());
-		for (int i = 0; i < numberOfProjectiles; i++)
-			window.draw(projectiles[i].GetSprite());
-
-		//TEXT DRAWING
-		window.draw(timeText.GetText());
-		window.draw(scoreText.GetText());
-		window.draw(exitText.GetText());
-		window.draw(highscoresTextTitle.GetText());
-		window.draw(highscoresText.GetText());
+		timeText.Draw();
+		scoreText.Draw();
+		exitText.Draw();
+		highscoresTextTitle.Draw();
+		highscoresText.Draw();
 
 		window.display();
 	}

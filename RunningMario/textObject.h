@@ -14,6 +14,7 @@ public:
 	void SetCharacterSize(unsigned int size);
 	sf::Text GetText();
 	void ClearText();
+	void Draw();
 
 private:
 	sf::Font _font;

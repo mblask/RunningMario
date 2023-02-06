@@ -36,3 +36,7 @@ sf::Text TextObject::GetText() {
 void TextObject::ClearText() {
 	_text.setString("");
 }
+
+void TextObject::Draw() {
+	_window->draw(_text);
+}

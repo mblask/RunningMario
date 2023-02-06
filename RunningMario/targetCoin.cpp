@@ -35,3 +35,7 @@ void TargetCoin::SetRandomPosition() {
 sf::Sprite TargetCoin::GetSprite() {
 	return _targetPointSprite;
 }
+
+void TargetCoin::Draw() {
+	_window->draw(_targetPointSprite);
+}

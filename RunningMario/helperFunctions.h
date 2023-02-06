@@ -13,7 +13,7 @@ sf::Vector2f GetRandomDirectionBetweenAngles(sf::Vector2i angles);
 
 sf::Vector2f GetRandomPosition(sf::Vector2i windowSize);
 
-sf::Vector2f GetRandomBoundaryPosition(sf::Vector2i windowSize, sf::Vector2f margin);
+sf::Vector2f GetRandomBoundaryPosition(sf::Vector2i windowSize, sf::Vector2f margin = sf::Vector2f(0.0f, 0.0f));
 
 bool chanceFunction(int chance);
 

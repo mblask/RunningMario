@@ -42,7 +42,7 @@ sf::Vector2f GetRandomPosition(sf::Vector2i windowSize) {
 	return sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y));
 }
 
-sf::Vector2f GetRandomBoundaryPosition(sf::Vector2i windowSize, sf::Vector2f margin = { 0, 0 }) {
+sf::Vector2f GetRandomBoundaryPosition(sf::Vector2i windowSize, sf::Vector2f margin) {
 	sf::Vector2f randomPosition;
 
 	//fix one border

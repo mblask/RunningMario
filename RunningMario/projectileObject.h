@@ -39,9 +39,9 @@ private:
     sf::Vector2i _previousObjectSprite;
     sf::Vector2i _currentObjectSprite;
 
-    sf::RenderWindow* _window;
+    sf::RenderWindow* _window = NULL;
 
-    bool _isActive;
+    bool _isActive = false;
 
     sf::Vector2f _initialPosition;
     float _baseSpeed = 0.0f;
@@ -53,4 +53,5 @@ private:
 
     void move();
     void checkMario();
+    void draw();
 };
